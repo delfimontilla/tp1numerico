@@ -10,6 +10,6 @@ function resultado = metodo_jacobi(A, b)
   L = obtener_L(A);
   while(any(abs((A*resultado)-b)>error) - b && i < cantMaxima)
     resultado = D*b - D*(L+U)*resultado;
-    i = i + 1
+    i = i + 1;
   endwhile
 endfunction
