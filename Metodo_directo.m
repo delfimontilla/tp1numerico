@@ -1,7 +1,5 @@
 function x = metodo_directo(A,b)
 
- [m,n]=size(A);
-  
  L = obtener_L(A);
  U = obtener_U(A);
  
@@ -16,12 +14,12 @@ function x = metodo_directo(A,b)
 endfor 
 
 m = length(U);
-x = zeros(n, 1);
+x = zeros(m, 1);
   
   for j = m : -1 : 1
   
-    x(j, 1) = b(j, 1) / U(j, j);
-    b(1 : j-1, 1) = b(1 : j-1, 1) - U(1 : j-1, j) * x(j, 1);
+    x(j, 1) = y(j, 1) / U(j, j);
+    y(1 : j-1, 1) = y(1 : j-1, 1) - U(1 : j-1, j) * x(j, 1);
   
 endfor
 
