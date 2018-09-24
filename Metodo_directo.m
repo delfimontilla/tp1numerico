@@ -1,22 +1,28 @@
-function resultado = metodo_directo(A)
-  [m,n]=size(A);
-  for j=1:m-1
-    for z=2:m
-      if A(j,j)==0
-        t=A(j,:):A(j,:)=A(z,:);
-        A(z,:)=t;  
-      endif
-    endfor
-    for i=j+1:m
-      A(i,:)=A(i,:)-A(j,:)*(A(i,j)/A(j,j));
-    endfor
-  endfor
-  x=zeros(1,m);
-  for s=m:-1:1
-    c=0;
-    for k=2:m
-      c=c+a(s,k)*x(k);
-    endfor
-    x(s)=(a(s,n)-c)/a(s,s):
-  endfor
+function x = metodo_directo(A,b)
+
+ [m,n]=size(A);
+  
+ L = obtener_L(A);
+ U = obtener_U(A);
+ 
+ n = length(L);
+ y = zeros(n, 1);
+  
+ for i = 1 : n
+    
+    y(i, 1) = b(i, 1) / L(i, i);
+    b(i+1 : n, 1) = b(i+1 : n, 1) - L(i+1 : n, i) * y(i, 1);
+  
+endfor 
+
+m = length(U);
+x = zeros(n, 1);
+  
+  for j = m : -1 : 1
+  
+    x(j, 1) = b(j, 1) / U(j, j);
+    b(1 : j-1, 1) = b(1 : j-1, 1) - U(1 : j-1, j) * x(j, 1);
+  
+endfor
+
 endfunction
