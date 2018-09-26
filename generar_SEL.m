@@ -1,4 +1,4 @@
-function [matriz_SEL, vector_solucion] = generarSEL(x, y, h)
+function [matriz_SEL, vector_solucion] = generar_SEL(x, y, h)
  
   filas = length([y(1):h:y(2)]);
   columnas = length([x(1):h:x(2)]);
@@ -25,28 +25,28 @@ function [matriz_SEL, vector_solucion] = generarSEL(x, y, h)
     if isnan(rectangulo(j + 1, i))
       matriz_SEL(k, k - 1) = 1;
     else
-      suma_solucion += rectangulo(j + 1, i);
+      suma_solucion -= rectangulo(j + 1, i);
     endif
     
     #actualizo lado derecho
     if isnan(rectangulo(j + 1, i + 2))
       matriz_SEL(k, k + 1) = 1;
     else
-      suma_solucion += rectangulo(j + 1, i + 2);
+      suma_solucion -= rectangulo(j + 1, i + 2);
     endif
     
     #actualizo arriba
     if isnan(rectangulo(j, i + 1))
       matriz_SEL(k, k - (columnas - 2)) = 1;
     else
-      suma_solucion += rectangulo(j, i + 1);
+      suma_solucion -= rectangulo(j, i + 1);
     endif
     
     #actualizo abajo
      if isnan(rectangulo(j + 2, i + 1))
       matriz_SEL(k, k + (columnas - 2)) = 1;
     else
-      suma_solucion += rectangulo(j + 2, i + 1);
+      suma_solucion -= rectangulo(j + 2, i + 1);
     endif
    
     vector_solucion(k, 1) = suma_solucion;

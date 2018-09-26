@@ -1,7 +1,7 @@
 
-function x = metodo_GaussSeidel(A, b)
+function x = metodo_gaussSeidel(A, b)
 
-  max_iteraciones = 50; %Opcional, elegido por el equipo
+  max_iteraciones = 500; %Opcional, elegido por el equipo
   error_tolerancia = 0.00001; %Opcional, elegido por el equipo
   iteraciones = 0;
   norma = 1;
@@ -37,5 +37,7 @@ function x = metodo_GaussSeidel(A, b)
   
   norma = norm(x0 - x);
   x0 = x;
-  
+  errorGaux(iteraciones) = norma;
   endwhile
+  csvwrite("errorGauss.csv",errorGaux);
+endfunction
